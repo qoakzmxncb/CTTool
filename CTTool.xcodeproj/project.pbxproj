@@ -16,8 +16,6 @@
 		D2500F731ADD4E5600E6E984 /* CTBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = D2500F701ADD4E5600E6E984 /* CTBase64.m */; };
 		D2500F741ADD4E5600E6E984 /* CTEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = D2500F721ADD4E5600E6E984 /* CTEncryption.m */; };
 		D2500F781ADD511500E6E984 /* CTKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = D2500F771ADD511500E6E984 /* CTKeyChain.m */; };
-		D2500F7A1ADD519700E6E984 /* libcommonCrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2500F791ADD519700E6E984 /* libcommonCrypto.dylib */; };
-		D2500F7C1ADD51A900E6E984 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2500F7B1ADD51A900E6E984 /* Security.framework */; };
 		D2500F7F1ADD537F00E6E984 /* CTPasswordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2500F7E1ADD537F00E6E984 /* CTPasswordManager.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +36,6 @@
 		D2500F721ADD4E5600E6E984 /* CTEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTEncryption.m; sourceTree = "<group>"; };
 		D2500F761ADD511500E6E984 /* CTKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTKeyChain.h; path = CTKeyChain/CTKeyChain.h; sourceTree = "<group>"; };
 		D2500F771ADD511500E6E984 /* CTKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTKeyChain.m; path = CTKeyChain/CTKeyChain.m; sourceTree = "<group>"; };
-		D2500F791ADD519700E6E984 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/usr/lib/system/libcommonCrypto.dylib; sourceTree = DEVELOPER_DIR; };
-		D2500F7B1ADD51A900E6E984 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		D2500F7D1ADD537F00E6E984 /* CTPasswordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTPasswordManager.h; path = CTKeyChain/CTPasswordManager.h; sourceTree = "<group>"; };
 		D2500F7E1ADD537F00E6E984 /* CTPasswordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTPasswordManager.m; path = CTKeyChain/CTPasswordManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,8 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2500F7C1ADD51A900E6E984 /* Security.framework in Frameworks */,
-				D2500F7A1ADD519700E6E984 /* libcommonCrypto.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,8 +54,6 @@
 		D2500F3C1ADD4D9C00E6E984 = {
 			isa = PBXGroup;
 			children = (
-				D2500F7B1ADD51A900E6E984 /* Security.framework */,
-				D2500F791ADD519700E6E984 /* libcommonCrypto.dylib */,
 				D2500F491ADD4DEA00E6E984 /* CTTool */,
 				D2500F481ADD4DEA00E6E984 /* Products */,
 			);
@@ -241,6 +233,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -290,6 +283,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -347,6 +341,7 @@
 				D2500F6A1ADD4DEB00E6E984 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

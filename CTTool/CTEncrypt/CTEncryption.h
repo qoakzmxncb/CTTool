@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CTBase64.h"
 
 @interface CTEncryption : NSObject
 

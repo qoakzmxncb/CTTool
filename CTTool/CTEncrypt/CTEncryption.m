@@ -8,7 +8,6 @@
 
 #import "CTEncryption.h"
 #import <CommonCrypto/CommonCrypto.h>
-#import "CTBase64.h"
 
 //DES加密时，所用到的偏移量
 const Byte iv[] = {1,2,3,4,5,6,7,8};
