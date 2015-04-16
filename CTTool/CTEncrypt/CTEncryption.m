@@ -74,85 +74,79 @@ const Byte iv[] = {1,2,3,4,5,6,7,8};
 
 #pragma mark - DES
 + (NSString *)DESEncrypt:(NSString *)plainText WithKey:(NSString *)key{
-    if(!plainText || [plainText isEqualToString:@""]){
-        return @"";
-    }
-    
-    const void *vkey = (const void *) [key UTF8String];
-    
-    NSData* data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
-    const void *vplainText = (const void *)[data bytes];
-    size_t plainTextBufferSize = [data length];
-    
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    
-    size_t bufferPtrSize = plainTextBufferSize + kCCBlockSizeDES;
-    uint8_t *bufferPtr = malloc(bufferPtrSize * sizeof(uint8_t));
-    size_t movedBytes = 0;
-    
-    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
-                                          kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding,
-                                          vkey,
-                                          kCCKeySizeDES,
-                                          NULL,
-                                          vplainText,
-                                          plainTextBufferSize,
-                                          (void *)bufferPtr,
-                                          bufferPtrSize,
-                                          &movedBytes);
-    
-    NSString *ciphertext = nil;
-    if (cryptStatus == kCCSuccess) {
-        NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
-        return [CTBase64 stringByEncodingData:myData];
-    }
-    return ciphertext;
+    return [self DESWithType:kCCEncrypt Algorithm:kCCAlgorithmDES Text:plainText Key:key];
 }
 
 + (NSString *)DESDecrypt:(NSString *)plainText WithKey:(NSString *)key{
-    return nil;
+    return [self DESWithType:kCCDecrypt Algorithm:kCCAlgorithmDES Text:plainText Key:key];
 }
 
 + (NSString *)DES3Encrypt:(NSString *)plainText WithKey:(NSString *)key{
-    if(!plainText || [plainText isEqualToString:@""]){
-        return @"";
-    }
-    
-    const void *vkey = (const void *) [key UTF8String];
-    
-    NSData* data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
-    const void *vplainText = (const void *)[data bytes];
-    size_t plainTextBufferSize = [data length];
-    
-    size_t bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
-    uint8_t *bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
-    size_t movedBytes = 0;
-    
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    
-    CCCryptorStatus ccStatus = CCCrypt(kCCEncrypt,
-                                       kCCAlgorithm3DES,
-                                       kCCOptionPKCS7Padding | kCCOptionECBMode,
-                                       vkey,
-                                       kCCKeySize3DES,
-                                       nil,
-                                       vplainText,
-                                       plainTextBufferSize,
-                                       (void *)bufferPtr,
-                                       bufferPtrSize,
-                                       &movedBytes);
-    
-    if (ccStatus == kCCSuccess) {
-        NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
-        return [CTBase64 stringByEncodingData:myData];
-    }
-    free(bufferPtr);
-    return nil;
+    return [self DESWithType:kCCEncrypt Algorithm:kCCAlgorithm3DES Text:plainText Key:key];
 }
 
 + (NSString *)DES3Decrypt:(NSString *)plainText WithKey:(NSString *)key{
+    return [self DESWithType:kCCDecrypt Algorithm:kCCAlgorithm3DES Text:plainText Key:key];
+}
+
++ (NSString *)DESWithType:(CCOperation)operation Algorithm:(CCAlgorithm)algorithm Text:(NSString *)text Key:(NSString *)key{
+    if (!text || [text isEqualToString:@""]) {
+        return @"";
+    }
+    
+    const void *dataIn;
+    size_t dataInLength;
+    
+    if (operation == kCCEncrypt) {
+        NSData *encryptData = [text dataUsingEncoding:NSUTF8StringEncoding];
+        dataInLength = [encryptData length];
+        dataIn = (const void *)[encryptData bytes];
+    }
+    else{
+        NSData *decryptData = [CTBase64 dataByDecodingString:text];
+        dataInLength = [decryptData length];
+        dataIn = (const void *)[decryptData bytes];
+    }
+    
+    const void *vkey = (const void *) [key UTF8String];
+    uint8_t *dataOut            = NULL;
+    size_t  dataOutAcailable    = 0;
+    size_t  dataOutMoved        = 0;
+    
+    if (algorithm == kCCAlgorithmDES) {
+        dataOutAcailable = (dataInLength + kCCBlockSizeDES) & ~(kCCBlockSizeDES -1);
+    }
+    else{
+        dataOutAcailable = (dataInLength + kCCBlockSize3DES) & ~(kCCBlockSize3DES -1);
+    }
+    
+    dataOut = malloc(dataOutAcailable * sizeof(uint8_t));
+    memset((void *)dataOut, 0x0, dataOutAcailable);
+    
+    
+    CCCryptorStatus ccStatus = CCCrypt(operation,
+                                       algorithm,
+                                       kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                       vkey,
+                                       algorithm == kCCAlgorithmDES ? kCCKeySizeDES : kCCKeySize3DES,
+                                       nil,
+                                       dataIn,
+                                       dataInLength,
+                                       (void *)dataOut,
+                                       dataOutAcailable,
+                                       &dataOutMoved);
+    
+    if (ccStatus == kCCSuccess) {
+        NSData *myData = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];
+        if (operation == kCCEncrypt) {
+            return [CTBase64 stringByEncodingData:myData];
+        }
+        else{
+            NSString *str = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
+            return str;
+        }
+    }
+    free(dataOut);
     return nil;
 }
 

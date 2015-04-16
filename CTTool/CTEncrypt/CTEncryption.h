@@ -11,6 +11,7 @@
 
 @interface CTEncryption : NSObject
 
+#pragma mark - MD5
 /**
  *  MD5加密，返回16位加密信息
  *
@@ -29,6 +30,7 @@
  */
 + (NSString *)md5Hex_32:(NSString *)string;
 
+#pragma mark - SHA
 /**
  *  SHA-1加密
  *
@@ -74,7 +76,7 @@
  */
 + (NSString *)sha512:(NSString *)string;
 
-
+#pragma mark - DES
 + (NSString *)DESEncrypt:(NSString *)plainText WithKey:(NSString *)key;
 
 + (NSString *)DESDecrypt:(NSString *)plainText WithKey:(NSString *)key;

@@ -13,7 +13,6 @@
 @end
 
 @implementation AppDelegate
-//用xcode提交
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
