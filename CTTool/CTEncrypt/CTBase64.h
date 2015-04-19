@@ -18,7 +18,7 @@
  *
  *  @return 返回NSData数据
  */
-+ (NSData *)dataByEncodingData:(NSData *)data;
++ (NSData *)dataByEncodingData:(NSData *)data NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSString -> Base64 Encode -> NSData
@@ -27,7 +27,7 @@
  *
  *  @return 返回NSData数据
  */
-+ (NSData *)dataByEncodingString:(NSString *)string;
++ (NSData *)dataByEncodingString:(NSString *)string NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSData -> Base64 Encode -> NSString
@@ -36,7 +36,7 @@
  *
  *  @return 返回NSString数据
  */
-+ (NSString *)stringByEncodingData:(NSData *)data;
++ (NSString *)stringByEncodingData:(NSData *)data NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSString -> Base64 Encode -> NSString
@@ -45,7 +45,7 @@
  *
  *  @return 返回NSString数据
  */
-+ (NSString *)stringByEncodingString:(NSString *)string;
++ (NSString *)stringByEncodingString:(NSString *)string NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSData -> Base64 Decode -> NSData
@@ -54,7 +54,7 @@
  *
  *  @return 返回NSData数据
  */
-+ (NSData *)dataByDecodingData:(NSData *)data;
++ (NSData *)dataByDecodingData:(NSData *)data NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSString -> Base64 Decode -> NSData
@@ -63,7 +63,7 @@
  *
  *  @return 返回NSData数据
  */
-+ (NSData *)dataByDecodingString:(NSString *)string;
++ (NSData *)dataByDecodingString:(NSString *)string NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSData -> Base64 Decode -> NSString
@@ -72,7 +72,7 @@
  *
  *  @return 返回NSString数据
  */
-+ (NSString *)stringByDecodingData:(NSData *)data;
++ (NSString *)stringByDecodingData:(NSData *)data NS_AVAILABLE(10_9, 7_0);
 
 /**
  *  NSString -> Base64 Decode -> NSString
@@ -81,6 +81,6 @@
  *
  *  @return 返回NSString数据
  */
-+ (NSString *)stringByDecodingString:(NSString *)string;
++ (NSString *)stringByDecodingString:(NSString *)string NS_AVAILABLE(10_9, 7_0);
 
 @end

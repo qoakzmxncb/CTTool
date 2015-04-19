@@ -12,7 +12,7 @@
 @implementation CTPasswordManager
 
 static NSString * const KEY_IN_KEYCHAIN = @"com.TCF.app.allinfo";
-static NSString * const KEY_PASSWORD = @"com.TCF.app.password";
+static NSString * const KEY_PASSWORD    = @"com.TCF.app.password";
 
 + (void)savePassword:(NSString *)password{
     NSMutableDictionary *usernamepasswordKVPairs = [NSMutableDictionary dictionary];
