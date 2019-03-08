@@ -19,8 +19,8 @@ int main(int argc, char * argv[]) {
 //    NSLog(@"%@",[CTEncryption sha1:@"1234567890"]);
 //    NSLog(@"%@",[CTBase64 stringByEncodingString:@"bedzberbedrb"]);
     
-    NSLog(@"%@",[CTEncryption DESEncrypt:@"123456" WithKey:@"1234567890"]);
-    NSLog(@"%@",[CTEncryption DESDecrypt:@"ED5wLgc3Mnw=" WithKey:@"1234567890"]);
-    NSLog(@"%@",[CTEncryption DES3Encrypt:@"123456" WithKey:@"1234567890"]);
-    NSLog(@"%@",[CTEncryption DES3Decrypt:@"jzpAZxnJP6A=" WithKey:@"1234567890"]);
+//    NSLog(@"%@",[CTEncryption DESEncrypt:@"123456" WithKey:@"1234567890"]);
+//    NSLog(@"%@",[CTEncryption DESDecrypt:@"ED5wLgc3Mnw=" WithKey:@"1234567890"]);
+//    NSLog(@"%@",[CTEncryption DES3Encrypt:@"123456" WithKey:@"1234567890"]);
+//    NSLog(@"%@",[CTEncryption DES3Decrypt:@"jzpAZxnJP6A=" WithKey:@"1234567890"]);
 }

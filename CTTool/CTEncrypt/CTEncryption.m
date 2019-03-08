@@ -9,9 +9,6 @@
 #import "CTEncryption.h"
 #import <CommonCrypto/CommonCrypto.h>
 
-//DES加密时，所用到的偏移量
-const Byte iv[] = {1,2,3,4,5,6,7,8};
-
 @implementation CTEncryption
 
 #pragma mark - MD5
@@ -65,7 +62,25 @@ const Byte iv[] = {1,2,3,4,5,6,7,8};
     const char *cstr = [string cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cstr length:string.length];
     uint8_t digest[length];
-    CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
+    switch (length) {
+        case CC_SHA1_DIGEST_LENGTH:
+            CC_SHA1(data.bytes, (CC_LONG)data.length, digest);
+            break;
+        case CC_SHA224_DIGEST_LENGTH:
+            CC_SHA224(data.bytes, (CC_LONG)data.length, digest);
+            break;
+        case CC_SHA256_DIGEST_LENGTH:
+            CC_SHA256(data.bytes, (CC_LONG)data.length, digest);
+            break;
+        case CC_SHA384_DIGEST_LENGTH:
+            CC_SHA384(data.bytes, (CC_LONG)data.length, digest);
+            break;
+        case CC_SHA512_DIGEST_LENGTH:
+            CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
+            break;
+        default:
+            break;
+    }
     NSMutableString* output = [NSMutableString stringWithCapacity:length * 2];
     for(int i = 0; i < length; i++)
         [output appendFormat:@"%02x", digest[i]];
